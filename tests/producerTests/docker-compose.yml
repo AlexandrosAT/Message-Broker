@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  api:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    image: node
+    working_dir: /
+    network_mode: host
+    deploy:
+      mode: replicated
+      replicas: 6

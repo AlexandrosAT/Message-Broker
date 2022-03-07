@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: "pgdb"
+    restart: always
+    image: postgres:14.1-alpine
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: pgpassword
+    volumes: 
+    - db:/var/lib/postgresql/data
+    - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+  api:
+    container_name: "broker"
+    build: 
+      context: ./src
+      dockerfile: Dockerfile
+    restart: always
+    image: node
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    links:
+      - db
+    working_dir: /
+    environment:
+      DB_HOST: db
+      DB_USER: username
+      DB_PASSWORD: pgpassword
+      DB_NAME: username
+      DB_PORT: 5432
+    volumes:
+      - ./:/src
+      - /src/node_modules
+volumes:
+  db:
+    driver: local
+    name: db

@@ -1,0 +1,15 @@
+{
+    "name": "shoot-the-messanger",
+    "version": "0.0.0",
+    "description": "Simple message broker implementation",
+    "author": "Alexandros Anthoulias-Topas",
+    "license": "UNLICENCED",
+    "private": true,
+    "scripts": {},
+    "dependencies": {
+        "body-parser": "^1.14.2",
+        "errorhandler": "^1.4.3",
+        "express": "^4.13.4",
+        "pg": "^8.5.1"
+    }
+}
